@@ -1,0 +1,18 @@
+# Répartition du travail
+
+## Addition
+
+### Didjcodt
+
++ half-adder
++ addition_signed
+
+### Tuetuopay
+
++ full-adder
++ substration_minus_one
+
+### Alexandre
+
++ addition
++ intégration et tests
