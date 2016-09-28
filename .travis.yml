@@ -3,3 +3,6 @@ script:
   - cd proj1
   - make
   - make test
+
+notifications:
+  irc: "irc.rezel.net#friendshipismagic"
