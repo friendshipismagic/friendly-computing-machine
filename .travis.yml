@@ -1,0 +1,5 @@
+sudo: false # only for faster builds
+script:
+  - cd proj1
+  - make
+  - make test
