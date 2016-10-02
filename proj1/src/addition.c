@@ -62,7 +62,23 @@ void full_adder(char a, char b, char c_in, char *s, char *c)
 // strings
 void addition(char *a, char *b, char *s)
 {
-  // TODO: implement
+    // Alexandre
+    // ---------
+    // Addition avec les bits de poids faible à gauche de la chaine,
+    // utilise half_adder pour l'initialisation, puis le full_adder
+    // pour la propagation de retenue
+
+    if (*a == '\0' || *b == '\0') return;
+    assert(is_binary(*a) && is_binary(*b));
+
+    char c_in, c_out;
+    half_adder(*(a++), *(b++), s++, &c_in);
+
+    while(*a != '\0' && *b != '\0') {
+        assert(is_binary(*a) && is_binary(*b));
+        full_adder(*(a++), *(b++), c_in, s++, &c_out);
+        c_in = c_out;
+    }
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
