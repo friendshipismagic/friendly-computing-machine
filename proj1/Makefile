@@ -26,9 +26,8 @@ SOURCES = src/addition.c
 OBJETS = ${SOURCES:%.c=%.o}
 
 #
-# Compilateur C++
+# Compilateur C
 #
-CXX = clang++
 CC  = clang
 
 #
@@ -37,7 +36,7 @@ CC  = clang
 #   -std=c++11 pour C++11
 # Example: CXXFLAGS= -std=c++11 -Wall -O -I/usr/local/qt/include
 #
-CXXFLAGS = -std=c11 -Wall -g -Wstrict -Wextra -Wpedantic -Werror
+CFLAGS = -std=c11 -Wall -g -Wextra -Wpedantic 
 
 #
 # Options de l'editeur de liens
@@ -62,11 +61,10 @@ all: ${PROG}
 run: ${PROG}
 	./${PROG}
 
-${PROG}: depend-${PROG} ${OBJETS}
-	${CXX} -o $@ ${LDFLAGS} ${OBJETS} ${LDLIBS}
+${PROG}: addition multiplication
 
 clean:
-	-@$(RM) *.o depend-${PROG} core 1>/dev/null 2>&1
+	-@$(RM) src/*.o core 1>/dev/null 2>&1
 
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
@@ -74,11 +72,22 @@ clean-all: clean
 tar:
 	tar cvf ${PROG}.tar.gz ${SOURCES}
 
-# Gestion des dependances : creation automatique des dependances en utilisant 
-# l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
-#
-depend-${PROG}:
-	${CXX} $(CXXFLAGS) -MM ${SOURCES} > depend-${PROG}
+
+addition: src/addition.o
+	${CC} -o $@ ${LDFLAGS} $<
+
+multiplication: src/multiplication.o
+	${CC} -o $@ ${LDFLAGS} $<
+
+
+
+test: tests-addition
+
+tests-addition: addition
+	make -f addition.tests
+
+tests-multiplication: multiplication
+	make -f multiplication.tests
 
 
 ###########################################
@@ -86,20 +95,7 @@ depend-${PROG}:
 # Regles implicites
 #
 
-.SUFFIXES: .cpp .cxx .c
-
-.cpp.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
-
-.cxx.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+.SUFFIXES: .c
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
-
-
-#############################################
-#
-# Inclusion du fichier des dependances
-#
--include depend-${PROG}
