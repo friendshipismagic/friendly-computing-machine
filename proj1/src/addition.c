@@ -57,9 +57,12 @@ void half_adder(char a, char b, char *s, char *c)
 	//  | 0 | 1 | 1 | 0 |
 	//  | 0 | 0 | 0 | 0 |
 	//  +---+---+---+---+
+	// So s is a xor b
+	// and c is a and b
 
 	assert(is_binary(a) && is_binary(b));
-
+	*s = xor(a, b);
+	*c = and(a, b);
 }
 
 // add two binary numbers and an input carry, returning the sum (s) and
