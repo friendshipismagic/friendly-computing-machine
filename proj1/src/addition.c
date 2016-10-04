@@ -69,7 +69,25 @@ void half_adder(char a, char b, char *s, char *c)
 // carry (c)
 void full_adder(char a, char b, char c_in, char *s, char *c)
 {
-	// TODO: implement
+	// Here is the truth table
+	//  +---+---+---+---+---+---+---+
+	//  | a | b | s1| c1| ci| s | co|
+	//  |---+---+---+---+---+---+---|
+	//  | 1 | 1 | 0 | 1 | 0 | 0 | 1 |
+	//  | 1 | 0 | 1 | 0 | 0 | 1 | 0 |
+	//  | 0 | 1 | 1 | 0 | 0 | 1 | 0 |
+	//  | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+	//  | 1 | 1 | 0 | 1 | 1 | 1 | 1 |
+	//  | 1 | 0 | 1 | 0 | 1 | 0 | 1 |
+	//  | 0 | 1 | 1 | 0 | 1 | 0 | 1 |
+	//  | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
+	//  +---+---+---+---+---+---+---+
+	//
+
+	char c_ab, s_ab, c_abc;
+	half_adder(a, b, &c_ab, &s_ab);
+	half_adder(s_ab, c_in, s, &c_abc);
+	*c = or(a, c_abc);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as
