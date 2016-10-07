@@ -83,11 +83,21 @@ multiplication: src/multiplication.o
 
 test: tests-addition
 
-tests-addition: addition
+tests-addition: addition tests-unit
+	@echo "== LANCEMENT DES TESTS UNITAIRES"
+	@echo ""
+	@./tests-unit
+	@echo ""
+	@echo "== TOUS LES TESTS SONT PASSES"
 	make -f addition.tests
 
 tests-multiplication: multiplication
 	make -f multiplication.tests
+
+tests-unit: src/tests.c
+	${CC} -o $@ ${LDFLAGS} $<
+
+
 
 
 ###########################################
