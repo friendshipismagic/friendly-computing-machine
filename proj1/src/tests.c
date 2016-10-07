@@ -11,22 +11,25 @@ void pass() {
 }
 
 void test(char* str) {
-    static n=1;
+    static int n=1;
     printf("TEST N° %i : %s", n++, str);
 }
 
-int main() {
+void half_adder_test(char a, char b, char s, char c) {
+    char _s = 0, _c = 0;
+    char msg[40];
+    sprintf(msg, "half_adder %c %c", a, b);
+    test(msg);
+    half_adder(a,b, &_s, &_c);
+    assert(s==_s && c==_c);
+    pass();
+}
 
-    test("half_adder 1 1");
-    {
-        char a = '1';
-        char b = '1';
-        char s = 0;
-        char c = 0;
-        half_adder(a,b,&s, &c);
-        assert(s=='0' && c=='1');
-        pass();
-    }
+int main() {
+    half_adder_test('0','0','0','0');
+    half_adder_test('0','1','1','0');
+    half_adder_test('1','0','1','0');
+    half_adder_test('1','1','0','1');
 
 
     return 0;
