@@ -51,7 +51,7 @@ void addition_test(char a[], char b[], char s[]) {
     addition(a, b, _s);
     sprintf(msg, "addition a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
     test(msg);
-    int correct = _s == s;
+    int correct = strcmp(_s, s) == 0;
     if (!correct)  fail();
     else           pass();
 }

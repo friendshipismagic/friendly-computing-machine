@@ -112,6 +112,7 @@ void addition(char *a, char *b, char *s)
 		full_adder(*(a++), *(b++), c_in, s++, &c_out);
 		c_in = c_out;
 	}
+    *s = '\0';
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
