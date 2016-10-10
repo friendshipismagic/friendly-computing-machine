@@ -85,9 +85,10 @@ void full_adder(char a, char b, char c_in, char *s, char *c)
 	//
 
 	char c_ab, s_ab, c_abc;
-	half_adder(a, b, &c_ab, &s_ab);
+	half_adder(a, b, &s_ab, &c_ab);
+
 	half_adder(s_ab, c_in, s, &c_abc);
-	*c = or(a, c_abc);
+	*c = or(c_ab, c_abc);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as

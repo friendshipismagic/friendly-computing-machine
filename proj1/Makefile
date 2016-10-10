@@ -94,7 +94,7 @@ tests-addition: addition tests-unit
 tests-multiplication: multiplication
 	make -f multiplication.tests
 
-tests-unit: src/tests.c
+tests-unit: src/tests.c src/addition.c 
 	${CC} -o $@ ${LDFLAGS} $<
 
 

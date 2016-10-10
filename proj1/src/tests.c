@@ -36,10 +36,10 @@ void half_adder_test(char a, char b, char s, char c) {
 void full_adder_test(char a, char b, char c_in, char s, char c) {
     char _s = 0, _c = 0;
     char msg[40];
-    sprintf(msg, "full_adder a:%c b:%c c_in:%c", a, b, c_in);
-    test(msg);
     fflush(stdout);
     full_adder(a,b,c_in, &_s, &_c);
+    sprintf(msg, "full_adder a:%c b:%c c_in:%c, got _s:%c _c:%c", a, b, c_in, _s, _c);
+    test(msg);
     int correct = s==_s && c==_c;
     if (!correct)  fail();
     else         pass();
@@ -47,10 +47,10 @@ void full_adder_test(char a, char b, char c_in, char s, char c) {
 
 void addition_test(char a[], char b[], char s[]) {
     char _s [N+1];
-    char msg[40];
-    sprintf(msg, "addition a:%s b:%s s:%s");
-    test(msg);
+    char msg[80];
     addition(a, b, _s);
+    sprintf(msg, "addition a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
+    test(msg);
     int correct = _s == s;
     if (!correct)  fail();
     else           pass();
