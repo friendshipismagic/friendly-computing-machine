@@ -40,9 +40,20 @@ void full_adder_test(char a, char b, char c_in, char s, char c) {
     test(msg);
     fflush(stdout);
     full_adder(a,b,c_in, &_s, &_c);
-    int error = s==_s && c==_c;
-    if (!error)  fail();
+    int correct = s==_s && c==_c;
+    if (!correct)  fail();
     else         pass();
+}
+
+void addition_test(char a[], char b[], char s[]) {
+    char _s [N+1];
+    char msg[40];
+    sprintf(msg, "addition a:%s b:%s s:%s");
+    test(msg);
+    addition(a, b, _s);
+    int correct = _s == s;
+    if (!correct)  fail();
+    else           pass();
 }
 
 int main() {
@@ -59,6 +70,11 @@ int main() {
     full_adder_test('1','0','1','0','1');
     full_adder_test('0','1','1','0','1');
     full_adder_test('1','1','1','1','1');
+
+    addition_test("00001", "00001", "00010"); // carry check
+    addition_test("00010", "00001", "00011"); // addition check
+    addition_test("01111", "01111", "10000"); // both
+    addition_test("10101", "00111", "11100"); // random
 
     return -is_fail;
 }
