@@ -71,10 +71,10 @@ int main() {
     full_adder_test('0','1','1','0','1');
     full_adder_test('1','1','1','1','1');
 
-    addition_test("00001", "00001", "00010"); // carry check
+    addition_test("10000", "10000", "01000"); // carry check
     addition_test("00010", "00001", "00011"); // addition check
-    addition_test("01111", "01111", "10000"); // both
-    addition_test("10101", "00111", "11100"); // random
+    addition_test("11110", "11110", "01111"); // both
+    addition_test("10101", "11100", "00111"); // random
 
     return -is_fail;
 }
