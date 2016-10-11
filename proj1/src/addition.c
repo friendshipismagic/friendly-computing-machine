@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "tests.h"
 
 // define the bit width of the binary numbers that can be processed.
 #define N 5
@@ -142,7 +143,7 @@ void addition_signed(char *a, char *b, char *s)
 	for(int i = 0; i<N; i++)
 		s[i] = xor(c_out[i], '1');
 
-	// TODO: Check for overflow
+	// Check for overflow
 	if((a[N-1] == '1' && b[N-1] == '1' && s[N-1] == '0')
 		|| (a[N-1] == '0' && b[N-1] == '0' && s[N-1] == '1')) {
 		// start chrome and go to bufferoverflow.com
