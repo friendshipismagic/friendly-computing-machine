@@ -41,7 +41,7 @@ CFLAGS = -std=c11 -Wall -g -Wextra -Wpedantic
 #
 # Options de l'editeur de liens
 #
-LDFLAGS = 
+LDFLAGS = -lm
 
 #
 # Librairies a utiliser

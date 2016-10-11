@@ -5,21 +5,32 @@
 #undef main
 
 #include <stdio.h>
+#include <math.h>
 
 int is_fail = 0;
+int _buffer_size = 0;
+const int _margin = 80;
+
+void pad() {
+    for(int i=_buffer_size; i< _margin; ++i) putchar(' ');
+    _buffer_size = 0;
+}
 
 void pass() {
-    printf("\t\t\t\t[OK]\n");
+    pad();
+    printf("[OK]\n");
 }
 
 void fail() {
-    printf("\t\t\t\t[FAIL]\n");
-    is_fail = 1;
+    pad();
+    printf("[FAIL]\n");
+    is_fail += 1;
 }
 
 void test(char* str) {
     static int n=1;
     printf("TEST N° %i : %s", n++, str);
+    _buffer_size += strlen(str) + 11 + (int) log10(n+0.9);
 }
 
 void half_adder_test(char a, char b, char s, char c) {
