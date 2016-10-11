@@ -119,7 +119,22 @@ void addition(char *a, char *b, char *s)
 // strings, and perform an overflow check.
 void addition_signed(char *a, char *b, char *s)
 {
-	// TODO: implement
+	if (*a == '\0' || *b == '\0') return;
+	assert(is_binary(*a) && is_binary(*b));
+
+	// Step 1 is to sum up a and b
+	char *c = NULL;
+	addition(a, b, c);
+
+	// Step 2 is to use 2's complement
+	// Invert ones and zeroes
+	char *c_out = c;
+	while(*c != '\0')
+		*c_out = xor(*c, '1');
+	// And add one to the result
+	addition(c_out, "00001", s);
+
+	// TODO: Check for overflow
 }
 
 // perform a subtraction of two N-bit binary numbers A and B, represented as
