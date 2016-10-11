@@ -121,17 +121,26 @@ void addition_signed(char *a, char *b, char *s)
 	if (*a == '\0' || *b == '\0') return;
 	assert(is_binary(*a) && is_binary(*b));
 
-	// Step 1 is to sum up a and b
-	char c[N];
-	addition(a, b, c);
-
-	// Step 2 is to use 2's complement
-	// Invert ones and zeroes
-	char c_out[N];
+	// Step 1 is to complement a
+	char a_out[N];
 	for(int i = 0; i<N; i++)
-		c_out[i] = xor(c[i], '1');
+		a_out[i] = xor(a[i], '1');
+
+	// Step 2 is to complement b
+	char b_out[N];
+	for(int i = 0; i<N; i++)
+		b_out[i] = xor(b[i], '1');
+
+	// Step 3 is to sum both
+	char c_out[N];
+	addition(a_out, b_out, c_out);
+
 	// And add one to the result
-	addition(c_out, "10000", s);
+	addition(c_out, "10000", c_out);
+
+	// Invert ones and zeroes
+	for(int i = 0; i<N; i++)
+		s[i] = xor(c_out[i], '1');
 
 	// TODO: Check for overflow
 }
