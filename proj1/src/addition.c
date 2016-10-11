@@ -123,14 +123,14 @@ void addition_signed(char *a, char *b, char *s)
 	assert(is_binary(*a) && is_binary(*b));
 
 	// Step 1 is to sum up a and b
-	char *c = NULL;
+	char c[N+9];
 	addition(a, b, c);
 
 	// Step 2 is to use 2's complement
 	// Invert ones and zeroes
-	char *c_out = c;
-	while(*c != '\0')
-		*c_out = xor(*c, '1');
+	char c_out[N+1];
+	for(int i = 0; i<N; i++)
+		c_out[i] = xor(c[i], '1');
 	// And add one to the result
 	addition(c_out, "00001", s);
 
