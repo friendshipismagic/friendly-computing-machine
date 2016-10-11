@@ -78,6 +78,18 @@ void addition_signed_test(char a[], char b[], char s[]) {
     else          pass();
 }
 
+void addition_signed_overflow_test(char a[], char b[], int overflow) {
+    char _s[N+1]; _s[0] = '\0'; _s[N]= '\0';
+    char msg[80];
+    addition_signed(a,b,_s);
+    int ov = has_exited();
+    sprintf(msg, "addition signed a:%s b:%s, overflow:%s, got:%s", a, b, overflow?"yes":"no", ov? "yes":"no");
+    test(msg);
+    int correct = ov && overflow;
+    if (!correct) fail();
+    else          pass();
+}
+
 void subtraction_minus_one_test(char a[], char b[], char s[]) {
     char _s[N+1]; _s[0] = '\0'; _s[N]= '\0';
     char msg[80];
@@ -117,6 +129,7 @@ int main() {
     addition_signed_test("00000", "11111", "11111"); //  0 - 1 = -1, zero test
     addition_signed_test("11111", "11111", "01111"); // -1 - 1 = -2, two negative
     addition_signed_test("11111", "10000", "00000"); // -1 - 2 = -3, with carry
+    addition_signed_test("00001", "00001", "00000"); // overflow test
     // TODO: overflow are tested in addition.tests makefile 
     
     subtraction_minus_one_test("10000", "10000", "11111");
