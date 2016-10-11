@@ -28,7 +28,7 @@ OBJETS = ${SOURCES:%.c=%.o}
 #
 # Compilateur C
 #
-CC  = gcc
+CC  = clang
 
 #
 # Options du compilateur C++
