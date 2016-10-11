@@ -12,7 +12,7 @@ int _buffer_size = 0;
 const int _margin = 80;
 
 void pad() {
-    for(int i=_buffer_size; i< _margin; ++i) putchar(' ');
+    for(int i=_buffer_size; i<= _margin; ++i) putchar(' ');
     _buffer_size = 0;
 }
 
@@ -30,7 +30,7 @@ void fail() {
 void test(char* str) {
     static int n=1;
     printf("TEST N° %i : %s", n++, str);
-    _buffer_size += strlen(str) + 11 + (int) log10(n+0.9);
+    _buffer_size += strlen(str) + 11 + (int) log10(n-1);
 }
 
 void half_adder_test(char a, char b, char s, char c) {
