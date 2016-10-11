@@ -143,6 +143,14 @@ void addition_signed(char *a, char *b, char *s)
 		s[i] = xor(c_out[i], '1');
 
 	// TODO: Check for overflow
+	if((a[N-1] == '1' && b[N-1] == '1' && s[N-1] == '0')
+		|| (a[N-1] == '0' && b[N-1] == '0' && s[N-1] == '1')) {
+		// start chrome and go to bufferoverflow.com
+		fprintf(stderr, "[!] Overflow detected! Stopping now...\n");
+		fprintf(stderr, "[!] a=%.*s, b=%.*s, result was %.*s\n",
+				N, a, N, b, N, s);
+		exit(2);
+	}
 }
 
 // perform a subtraction of two N-bit binary numbers A and B, represented as
