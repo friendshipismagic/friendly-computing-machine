@@ -56,6 +56,17 @@ void addition_test(char a[], char b[], char s[]) {
     else           pass();
 }
 
+void addition_signed_test(char a[], char b[], char s[]) {
+    char _s[N+1];
+    char msg[80];
+    addition_signed(a,b,_s);
+    sprintf(msg, "addition signed a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
+    test(msg);
+    int correct = strcmp(_s,s) == 0;
+    if (!correct) fail();
+    else          pass();
+}
+
 int main() {
     half_adder_test('0','0','0','0');
     half_adder_test('0','1','1','0');
@@ -75,6 +86,11 @@ int main() {
     addition_test("00010", "00001", "00011"); // addition check
     addition_test("11110", "11110", "01111"); // both
     addition_test("10101", "11100", "00111"); // random
+
+    addition_signed_test("00000", "00000", "00000"); // stupid error check
+    addition_signed_test("11111", "11111", "01111"); // -1 -1 = -2, does it sums up correctly ?
+    addition_signed_test("11111", "10000", "00000"); // -1 + 1 = 0, endian check
+    // TODO: overflow are tested in addition.tests makefile 
 
     return -is_fail;
 }
