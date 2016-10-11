@@ -28,7 +28,7 @@ OBJETS = ${SOURCES:%.c=%.o}
 #
 # Compilateur C
 #
-CC  = clang
+CC  = gcc
 
 #
 # Options du compilateur C++
@@ -94,7 +94,7 @@ tests-addition: addition tests-unit
 tests-multiplication: multiplication
 	make -f multiplication.tests
 
-tests-unit: src/tests.c src/addition.c 
+tests-unit: src/tests.o src/addition.o 
 	${CC} -o $@ ${LDFLAGS} $<
 
 
