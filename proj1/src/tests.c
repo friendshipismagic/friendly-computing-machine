@@ -86,6 +86,7 @@ int main() {
     addition_test("00010", "00001", "00011"); // addition check
     addition_test("11110", "11110", "01111"); // both
     addition_test("10101", "11100", "00111"); // random
+    addition_test("11111", "10000", "00000");
 
     addition_signed_test("00000", "00000", "00000"); // stupid error check
     addition_signed_test("11111", "11111", "01111"); // -1 -1 = -2, does it sums up correctly ?
