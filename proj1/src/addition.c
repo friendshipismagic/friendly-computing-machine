@@ -103,7 +103,7 @@ void addition(char *a, char *b, char *s)
 
 	char c_in, c_out;
 
-    // Avoid flush
+    // Avoid flush by splitting bootstrap and forloop addition with full_adder
     assert(is_binary(a[0]) && is_binary(b[0]));
     half_adder(a[0], b[0], s, &c_in);
 

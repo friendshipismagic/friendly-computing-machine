@@ -46,7 +46,7 @@ void full_adder_test(char a, char b, char c_in, char s, char c) {
 }
 
 void addition_test(char a[], char b[], char s[]) {
-    char _s [N+1]; _s[0] = '\0';
+    char _s [N+1]; _s[0] = '\0';_s[N]= '\0';
     char msg[80];
     addition(a, b, _s);
     sprintf(msg, "addition a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
@@ -57,7 +57,7 @@ void addition_test(char a[], char b[], char s[]) {
 }
 
 void addition_signed_test(char a[], char b[], char s[]) {
-    char _s[N+1]; _s[0] = '\0';
+    char _s[N+1]; _s[0] = '\0'; _s[N]= '\0';
     char msg[80];
     addition_signed(a,b,_s);
     sprintf(msg, "addition signed a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
