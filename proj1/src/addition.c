@@ -141,7 +141,13 @@ void addition_signed(char *a, char *b, char *s)
 // strings: S = A - B - 1
 void subtraction_minus_one(char *a, char *b, char *s)
 {
-	// TODO: implement
+	// First step is to convert B to -B-1 using two's complement
+	char b_out[N+1];
+	for(int i = 0; i<N; i++)
+		b_out[i] = xor(b[i], '1');
+
+	// Next step is just to sum A and b_out
+	addition(a, b_out, s);
 }
 
 // convert an input binary number represented as string to a fixed-width binary
