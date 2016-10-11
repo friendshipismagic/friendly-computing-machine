@@ -97,22 +97,21 @@ void addition(char *a, char *b, char *s)
 {
 	// Alexandre
 	// ---------
-	// Addition avec les bits de poids faible à gauche de la chaine,
-	// utilise half_adder pour l'initialisation, puis le full_adder
-	// pour la propagation de retenue
-
-	if (*a == '\0' || *b == '\0') return;
-	assert(is_binary(*a) && is_binary(*b));
+    // Addition in little endian mode
+    // Use half_adder for bootstrap, then full_adder
+    // for cary propogation
 
 	char c_in, c_out;
-	half_adder(*(a++), *(b++), s++, &c_in);
 
-	while(*a != '\0' && *b != '\0') {
-		assert(is_binary(*a) && is_binary(*b));
-		full_adder(*(a++), *(b++), c_in, s++, &c_out);
+    // Avoid flush
+    assert(is_binary(a[0]) && is_binary(b[0]));
+    half_adder(a[0], b[0], s, &c_in);
+
+    for(unsigned int i=1; i<N; ++i) {
+        assert(is_binary(a[i]) && is_binary(b[i]));
+        full_adder(a[i], b[i], c_in, s+i, &c_out);
 		c_in = c_out;
 	}
-    *s = '\0';
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
