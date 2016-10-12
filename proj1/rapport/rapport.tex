@@ -4,6 +4,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+
 
 \author{Clément Decoodt, Alexis Bauvin, Alexandre Janniaux}
 \title{PR1 SE201: execution platforms}
@@ -25,6 +28,33 @@
 \section{Processor design}
 
 \subsection{Instruction set architecture}
+
+We defined our architecture set instruction as the following:
+
+\subsubsection{Memory instructions}
+
+\begin{tabular}{@{}ll@{}}
+    LW          & Load word from memory to register                      \\
+    SW          & Store word from register or immediate memory to memory \\
+\end{tabular}
+
+\subsubsection{Arithmetical instructions}
+
+\begin{tabular}{@{}ll@{}}
+    ADD         & Add word                                              \\
+    %ADDI        & Add immediate word                                    \\
+    %ADDIU       & Add immediate unsigned word                           \\
+    %ADDU        & Add unsigned word                                     \\
+    SUB         & Subtract word                                         \\
+    MUL         & Multiplicate word                                     \\
+\end{tabular}
+
+
+\subsubsection{Branch instructions}
+
+\begin{tabular}{@{}ll@{}}
+    BNE         & Jump to defined instruction if not equal
+\end{tabular}
 
 \subsection{Pipelining}
 
