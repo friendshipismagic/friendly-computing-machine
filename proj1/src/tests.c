@@ -160,9 +160,10 @@ int main() {
 	multiplication_test(0x0, 0x0, 0x0); // 0 * 0 : check for buggy optimisations
 	multiplication_test(0x1, 0x1, 0x1); // 1 * 1 : same
 	multiplication_test(0x2, 0x2, 0x4);
-	multiplication_test(0x1337, 0x2, 0x4);
+	multiplication_test(0x1337, 0x2, 0x1337 << 1);
 	multiplication_test(1 + (1<<2), 1 + (1<<2), (1 + (1<<2))*(1 + (1<<2)));
-	multiplication_test(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFFFFFFFFFF);
+	multiplication_test(0xFFFFFFFF, 0xFFFFFFFF,
+	                    (uint64_t)0xFFFFFFFF * (uint64_t)0xFFFFFFFF);
 
     return -is_fail;
 }
