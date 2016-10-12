@@ -157,5 +157,12 @@ int main() {
     subtraction_minus_one_test("00000", "11111", "00000");
     subtraction_minus_one_test("11111", "11100", "11101");
 
+	multiplication_test(0x0, 0x0, 0x0); // 0 * 0 : check for buggy optimisations
+	multiplication_test(0x1, 0x1, 0x1); // 1 * 1 : same
+	multiplication_test(0x2, 0x2, 0x4);
+	multiplication_test(0x1337, 0x2, 0x4);
+	multiplication_test(1 + (1<<2), 1 + (1<<2), (1 + (1<<2))*(1 + (1<<2)));
+	multiplication_test(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFFFFFFFFFF);
+
     return -is_fail;
 }
