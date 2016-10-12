@@ -2,10 +2,13 @@
 #include "addition.c"
 #undef main
 #define main main_temp2
+#define program program2
+#include "multiplication.c"
 #undef main
 
 #include <stdio.h>
 #include <math.h>
+#include <inttypes.h>
 
 int is_fail = 0;
 int _buffer_size = 0;
@@ -104,6 +107,17 @@ void subtraction_minus_one_test(char a[], char b[], char s[]) {
     else          pass();
 }
 
+void multiplication_test(uint32_t a, uint32_t b, uint64_t s) {
+	uint64_t _s = multiplication(a, b);
+	char msg[80];
+	sprintf(msg, "multiplication a:%" PRIu32 " b:%" PRIu32 " s:%" PRIu64
+	        ", got _s:%" PRIu64, a, b, s, _s);
+	test(msg);
+	int correct = s == _s;
+	if (!correct) fail();
+	else          pass();
+}
+
 int main() {
     half_adder_test('0','0','0','0');
     half_adder_test('0','1','1','0');
@@ -133,8 +147,8 @@ int main() {
     addition_signed_test("11111", "11111", "01111"); // -1 - 1 = -2, two negative
     addition_signed_test("11111", "10000", "00000"); // -1 - 2 = -3, with carry
     addition_signed_test("00001", "00001", "00000"); // overflow test
-    // TODO: overflow are tested in addition.tests makefile 
-    
+    // TODO: overflow are tested in addition.tests makefile
+
     subtraction_minus_one_test("10000", "10000", "11111");
     subtraction_minus_one_test("10000", "00000", "00000");
     subtraction_minus_one_test("00000", "11111", "00000");
