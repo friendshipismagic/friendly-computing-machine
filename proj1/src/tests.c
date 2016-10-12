@@ -1,10 +1,13 @@
 #define main main_temp1
+#define program program1
 #include "addition.c"
 #undef main
+#undef program
 #define main main_temp2
 #define program program2
 #include "multiplication.c"
 #undef main
+#undef program
 
 #include <stdio.h>
 #include <math.h>
@@ -32,8 +35,8 @@ void fail() {
 
 void test(char* str) {
     static int n=1;
-    printf("TEST N° %i : %s", n++, str);
-    _buffer_size += strlen(str) + 11 + (int) log10(n-1);
+    printf("TEST N° %2i : %s", n++, str);
+    _buffer_size += strlen(str) + 11 + (int) 2;
 }
 
 void half_adder_test(char a, char b, char s, char c) {
@@ -49,7 +52,7 @@ void half_adder_test(char a, char b, char s, char c) {
 
 void full_adder_test(char a, char b, char c_in, char s, char c) {
     char _s = 0, _c = 0;
-    char msg[40];
+    char msg[80];
     fflush(stdout);
     full_adder(a,b,c_in, &_s, &_c);
     sprintf(msg, "full_adder a:%c b:%c c_in:%c, got _s:%c _c:%c",
@@ -109,9 +112,9 @@ void subtraction_minus_one_test(char a[], char b[], char s[]) {
 
 void multiplication_test(uint32_t a, uint32_t b, uint64_t s) {
 	uint64_t _s = multiplication(a, b);
-	char msg[80];
-	sprintf(msg, "multiplication a:%" PRIu32 " b:%" PRIu32 " s:%" PRIu64
-	        ", got _s:%" PRIu64, a, b, s, _s);
+	char msg[512];
+	sprintf(msg, "multiplication a:%" PRIx32 " b:%" PRIx32 " s:%" PRIx64
+	        ", got _s:%" PRIx64, a, b, s, _s);
 	test(msg);
 	int correct = s == _s;
 	if (!correct) fail();
