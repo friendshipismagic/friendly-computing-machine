@@ -10,7 +10,14 @@ char *program = NULL;
 // perform an unsigned multiplication of two unsigned numbers
 uint64_t multiplication(uint32_t a, uint32_t b)
 {
-	// TODO: implement
+	if (a == 0 || b == 0) return 0;
+	if (a == 1) return b;
+	if (b == 1) return a;
+
+	uint64_t out = a;
+	for (uint32_t i = 0; i < b - 1; i++)
+		out += a;
+	return out;
 }
 
 // convert a number represented as string to an unsigned integer.

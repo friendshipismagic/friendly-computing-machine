@@ -16,8 +16,8 @@ PROG = friendly-computing-machine
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = src/addition.c 
-		  #src/multiplication.c \
+SOURCES = src/addition.c \
+		  src/multiplication.c
 		  #src/main.c
 
 #
