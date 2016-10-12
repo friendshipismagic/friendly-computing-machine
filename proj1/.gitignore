@@ -1,0 +1,8 @@
+# Build files
+*.o
+# Binaries
+addition
+multiplication
+
+# Vim swap files
+*.swp
