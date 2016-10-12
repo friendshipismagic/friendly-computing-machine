@@ -49,7 +49,8 @@ void full_adder_test(char a, char b, char c_in, char s, char c) {
     char msg[40];
     fflush(stdout);
     full_adder(a,b,c_in, &_s, &_c);
-    sprintf(msg, "full_adder a:%c b:%c c_in:%c, got _s:%c _c:%c", a, b, c_in, _s, _c);
+    sprintf(msg, "full_adder a:%c b:%c c_in:%c, got _s:%c _c:%c",
+	        a, b, c_in, _s, _c);
     test(msg);
     int correct = s==_s && c==_c;
     if (!correct)  fail();
@@ -83,7 +84,8 @@ void addition_signed_overflow_test(char a[], char b[], int overflow) {
     char msg[80];
     addition_signed(a,b,_s);
     int ov = has_exited();
-    sprintf(msg, "addition signed a:%s b:%s, overflow:%s, got:%s", a, b, overflow?"yes":"no", ov? "yes":"no");
+    sprintf(msg, "addition signed a:%s b:%s, overflow:%s, got:%s",
+	        a, b, overflow?"yes":"no", ov? "yes":"no");
     test(msg);
     int correct = ov && overflow;
     if (!correct) fail();
@@ -94,7 +96,8 @@ void subtraction_minus_one_test(char a[], char b[], char s[]) {
     char _s[N+1]; _s[0] = '\0'; _s[N]= '\0';
     char msg[80];
     subtraction_minus_one(a,b,_s);
-    sprintf(msg, "subtraction_minus_one signed a:%s b:%s s:%s, got _s:%s", a, b, s, _s);
+    sprintf(msg, "subtraction_minus_one signed a:%s b:%s s:%s, got _s:%s",
+	        a, b, s, _s);
     test(msg);
     int correct = strcmp(_s,s) == 0;
     if (!correct) fail();
