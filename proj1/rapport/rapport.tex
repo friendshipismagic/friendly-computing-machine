@@ -44,9 +44,14 @@ We defined our architecture set instruction as the following:
     ADD         & Add word                                              \\
     %ADDI        & Add immediate word                                    \\
     %ADDIU       & Add immediate unsigned word                           \\
-    %ADDU        & Add unsigned word                                     \\
+    ADDU        & Add unsigned word                                     \\
     SUB         & Subtract word                                         \\
-    MUL         & Multiplicate word                                     \\
+    %SUBU        & Subtract unsigned word                                \\
+    MULTU       & Multiplicate unsigned word                            \\
+    BNE         & Branch if non equal                                   \\
+    LW          & Load word                                             \\
+    SW          & Store word                                            \\
+	LWI         & Load immediate word                                   \\
 \end{tabular}
 
 
