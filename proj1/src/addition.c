@@ -98,19 +98,19 @@ void addition(char *a, char *b, char *s)
 {
 	// Alexandre
 	// ---------
-    // Addition in little endian mode
-    // Use half_adder for bootstrap, then full_adder
-    // for cary propogation
+	// Addition in little endian mode
+	// Use half_adder for bootstrap, then full_adder
+	// for cary propogation
 
 	char c_in, c_out;
 
-    // Avoid flush by splitting bootstrap and forloop addition with full_adder
-    assert(is_binary(a[0]) && is_binary(b[0]));
-    half_adder(a[0], b[0], s, &c_in);
+	// Avoid flush by splitting bootstrap and forloop addition with full_adder
+	assert(is_binary(a[0]) && is_binary(b[0]));
+	half_adder(a[0], b[0], s, &c_in);
 
-    for(unsigned int i=1; i<N; ++i) {
-        assert(is_binary(a[i]) && is_binary(b[i]));
-        full_adder(a[i], b[i], c_in, s+i, &c_out);
+	for(unsigned int i=1; i<N; ++i) {
+		assert(is_binary(a[i]) && is_binary(b[i]));
+		full_adder(a[i], b[i], c_in, s+i, &c_out);
 		c_in = c_out;
 	}
 }
@@ -145,7 +145,7 @@ void addition_signed(char *a, char *b, char *s)
 
 	// Check for overflow
 	if((a[N-1] == '1' && b[N-1] == '1' && s[N-1] == '0')
-		|| (a[N-1] == '0' && b[N-1] == '0' && s[N-1] == '1')) {
+			|| (a[N-1] == '0' && b[N-1] == '0' && s[N-1] == '1')) {
 		// start chrome and go to bufferoverflow.com
 		fprintf(stderr, "[!] Overflow detected! Stopping now...\n");
 		fprintf(stderr, "[!] a=%.*s, b=%.*s, result was %.*s\n",
