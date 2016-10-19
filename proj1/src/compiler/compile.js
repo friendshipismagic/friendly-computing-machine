@@ -69,6 +69,20 @@ var compileAsm = (function(){
 	}
 	// Instruction list
 	var instructions = {
+		nop: {
+			opcode: 0x00,
+			parser: function() { return 0x00; }
+		},
+		add:   { opcode: 0x03, parser: parseR },
+		addu:  { opcode: 0x07, parser: parseR },
+		sub:   { opcode: 0x02, parser: parseR },
+		subu:  { opcode: 0x06, parser: parseR },
+		mulu:  { opcode: 0x04, parser: parseR },
+		addiu: { opcode: 0x02, parser: parseI },
+		lwi:   { opcode: 0x03, parser: parseI },
+		lw:    { opcode: 0x02, parser: parseJ },
+		sw:    { opcode: 0x03, parser: parseJ },
+		bne:   { opcode: 0x01, parser: parseK }
 	};
 
 	return function(src) {
@@ -97,11 +111,14 @@ var compileAsm = (function(){
 			}
 		}).filter(function(i){ return i != undefined; }).map(function(l, lno) {
 			// Check the instruction actually exists
-			var i = instruction[l[0]];
+			var i = instructions[l[0]];
 			if (i != undefined) {
-				l = i.parser(l);
-				l[0] = i.opcode;
-				return l;
+				try {
+					return i.parser(i.opcode, l);
+				}
+				catch (e) {
+					throw "Error: " + e + " at address " + lno;
+				}
 			}
 			else throw "Error: illegal instruction `" + l[0] + "` at address " +
 				lno;
