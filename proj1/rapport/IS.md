@@ -9,6 +9,10 @@ We use language prefix to economize instruction length
 
 # R-type instructions
 
+R-type Instruction takes content of input reg addr 1 and input reg addr 2,
+applies some arithmetical operation to them and store the result to output 
+register.
+
 |---------+----------------------+------------------+------------------|
 | OP Code | output register addr | input reg addr 1 | input reg addr 2 |
 |---------+----------------------+------------------+------------------|
@@ -18,6 +22,7 @@ We use language prefix to economize instruction length
 |---------+------+---------------------------------|
 | Op Code | ASM  | Short Description               |
 |---------+------+---------------------------------|
+| 0000000 | NOP  | Don't do anything               |
 | 0000011 | ADD  | Adds two signed numbers         |
 | 0000111 | ADDU | Adds two unsigned numbers       |
 | 0000010 | SUB  | Substracts signed numbers       |
