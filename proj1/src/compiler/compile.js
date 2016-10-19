@@ -26,6 +26,16 @@ var compileAsm = (function(){
 		// Get the immediate value and convert to number
 		return parseInt(s.replace(schema, "$1"), 16);
 	}
+	function mergeArray(array, widths) {
+		// MSBs are at the BEGINNING of array
+		var shift = 16, // 16 bit instructions
+		    val = 0;
+		array.forEach(function(n, i) {
+			shift -= widths[i];
+			val |= n << shift;
+		});
+		return val;
+	}
 	// Instruction list
 	var instructions = {
 	};
