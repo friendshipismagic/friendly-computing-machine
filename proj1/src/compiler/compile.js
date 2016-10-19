@@ -31,7 +31,10 @@ var compileAsm = (function(){
 		var shift = 16, // 16 bit instructions
 		    val = 0;
 		array.forEach(function(n, i) {
-			shift -= widths[i];
+			let w = widths[i];
+			// Taking care of negative values : converting them to CA2
+			if (n < 0) n = Math.pow(2, w) + n;
+			shift -= w;
 			val |= n << shift;
 		});
 		return val;
