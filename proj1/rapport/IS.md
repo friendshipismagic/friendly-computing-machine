@@ -45,6 +45,15 @@ register.
 | 11      | LWI   | Loads an immediate word                                        |
 |---------+-------+----------------------------------------------------------------|
 
+## ADDIU
+
+Takes an immediate value, and adds it to the output register content, then store
+it to output register.
+
+## LWI
+
+Sets the output register to immediate value.
+
 # J-type instructions
 
 |---------+----------------------+------------------+--------------|
