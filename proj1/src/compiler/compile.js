@@ -36,6 +36,34 @@ var compileAsm = (function(){
 		});
 		return val;
 	}
+	function parseI(i, l) {
+		// instruction $reg value
+		return mergeArray(
+			[i, parseRegister(l[1]), parseImmediate(l[2])],
+			[2, 3, 11]
+		);
+	}
+	function parseJ(i, l) {
+		// instruction $reg1 $reg2 value
+		return mergeArray(
+			[i, parseRegister(l[1]), parseRegister(l[2]), parseImmediate(l[3])],
+			[4, 3, 3, 6]
+		);
+	}
+	function parseK(i, l) {
+		// instruction value $reg1 $reg2
+		return mergeArray(
+			[i, parseImmediate(l[1]), parseRegister(l[2]), parseRegister(l[3])],
+			[2, 8, 3, 3]
+		);
+	}
+	function parseR(i, l) {
+		// instruction $reg1 $reg2 $reg3
+		return mergeArray(
+			[i, parseRegister(l[1]), parseRegister(l[2]), parseRegister(l[3])],
+			[7, 3, 3, 3]
+		);
+	}
 	// Instruction list
 	var instructions = {
 	};
