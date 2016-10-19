@@ -73,6 +73,9 @@ Memory type instructions. Moves data from/to register to/from memory.
 
 # K-type instructions
 
+Branch-type instructions. Branches to (current address + register pseudo addr)
+based on input registers arithmetical comparison.
+
 |---------+----------------------+------------------+------------------|
 | OP Code | register pseudo addr | input reg addr 1 | input reg addr 2 |
 |---------+----------------------+------------------+------------------|
