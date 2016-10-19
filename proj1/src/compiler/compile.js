@@ -15,14 +15,14 @@ var compileAsm = (function(){
 	function parseRegister(s) {
 		let schema = /^\$r([0-7])$/i;
 		// Check the format
-		if (!schema.test(s)) return null;
+		if (!schema.test(s)) throw "Invalid register `" + s + "`";
 		// Get the register number and convert to number
 		return +s.replace(schema, "$1");
 	}
 	function parseImmediate(s) {
 		let schema = /^(-?[0-9a-f]+)h$/i;
 		// Check format
-		if (!schema.test(s)) return null;
+		if (!schema.test(s)) throw "Invalid immediate value `" + s + "`";
 		// Get the immediate value and convert to number
 		return parseInt(s.replace(schema, "$1"), 16);
 	}
