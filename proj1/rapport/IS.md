@@ -56,13 +56,14 @@ Sets the output register to immediate value.
 
 # J-type instructions
 
-Memory type instructions. Moves data from/to register to/from memory.
+Memory type instructions. Moves data from/to register (concatenated registers)
+to/from memory.
 
-|---------+---------------+-------------|
-| OP Code | register addr | memory addr |
-|---------+---------------+-------------|
-| 4 bits  | 3 bits        | 9 bits      |
-|---------+---------------+-------------|
+|---------+-----------------+-----------------+-------------|
+| OP Code | register addr 1 | register addr 2 | memory addr |
+|---------+-----------------+-----------------+-------------|
+| 4 bits  | 3 bits          | 3 bits          | 6 bits      |
+|---------+-----------------+-----------------+-------------|
 
 |---------+-----+-------------------|
 | Op Code | ASM | Short Description |
