@@ -142,3 +142,8 @@ function arrayToString(arr) {
 	}).join("");
 }
 
+// Add to exports to run easily in nodejs
+module.exports = {
+	compileAsm: compileAsm,
+	arrayToString: arrayToString
+};
