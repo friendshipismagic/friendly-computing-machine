@@ -128,5 +128,17 @@ var compileAsm = (function(){
 	};
 })();
 
-console.log(compileAsm("main:\n    lwi 2, $r1\n    lwi 20, $r2\n    loop:\n    multi $r1, $r1, 2\n    subi  $r2, $r2, 1\n    bne   $r2, $r0, -2"))
+function arrayToString(arr) {
+	/**
+	 * Pads the string s to length l with f
+	 * @example paddingLeft("42", 4, "0") = "0042"
+	 */
+	function paddingLeft(s, l, f) {
+		if (s.length >= l) return s;
+		else return paddingLeft(f + s, l, f);
+	}
+	return arr.map(n => {
+		return paddingLeft(n.toString("16"), 4, "0");
+	}).join("");
+}
 
