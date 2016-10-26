@@ -26,6 +26,10 @@ var compileAsm = (function(){
 		// Get the immediate value and convert to number
 		return parseInt(s.replace(schema, "$1"), 16);
 	}
+	function parseLabel(s, labels) {
+		if (labels[s]) return labels[s];
+		else throw "unknown label " + s;
+	}
 	function mergeArray(array, widths) {
 		// MSBs are at the BEGINNING of array
 		var shift = 16, // 16 bit instructions
@@ -53,10 +57,14 @@ var compileAsm = (function(){
 			[4, 3, 3, 6]
 		);
 	}
-	function parseK(i, l) {
+	function parseK(i, l, labels, lno) {
 		// instruction value $reg1 $reg2
+		// or instruction label $reg1 $reg2
+		var offset;
+		try {       offset = parseImmediate(l[1]); }
+		catch (e) { offset = parseLabel(l[1], labels) - lno; }
 		return mergeArray(
-			[i, parseImmediate(l[1]), parseRegister(l[2]), parseRegister(l[3])],
+			[i, offset, parseRegister(l[2]), parseRegister(l[3])],
 			[2, 8, 3, 3]
 		);
 	}
@@ -114,7 +122,7 @@ var compileAsm = (function(){
 			var i = instructions[l[0]];
 			if (i != undefined) {
 				try {
-					return i.parser(i.opcode, l);
+					return i.parser(i.opcode, l, labels, lno);
 				}
 				catch (e) {
 					console.log(l);
@@ -127,7 +135,6 @@ var compileAsm = (function(){
 				lno;
 			}
 		});
-		console.log(labels);
 		return code;
 	};
 })();
