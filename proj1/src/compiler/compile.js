@@ -109,7 +109,7 @@ var compileAsm = (function(){
 					return s.toLowerCase();
 				});
 			}
-		}).filter(function(i){ return i != undefined; }).map(function(l, lno) {
+		}).filter(l => l != undefined && l != "").map(function(l, lno) {
 			// Check the instruction actually exists
 			var i = instructions[l[0]];
 			if (i != undefined) {
@@ -117,11 +117,15 @@ var compileAsm = (function(){
 					return i.parser(i.opcode, l);
 				}
 				catch (e) {
+					console.log(l);
 					throw "Error: " + e + " at address " + lno;
 				}
 			}
-			else throw "Error: illegal instruction `" + l[0] + "` at address " +
+			else {
+				console.log(l);
+				throw "Error: illegal instruction `" + l[0] + "` at address " +
 				lno;
+			}
 		});
 		console.log(labels);
 		return code;
@@ -147,3 +151,4 @@ module.exports = {
 	compileAsm: compileAsm,
 	arrayToString: arrayToString
 };
+
