@@ -68,6 +68,33 @@ Instruction list :
 
 \subsubsection{I-type instructions}
 
+Instruction structure :
+
+\begin{center}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		opcode & output register & immediate value \\
+		\hline
+		2 bits & 3 bits & 11 bits \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Instruction list :
+
+\begin{center}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Opcode & Mnemonic & Description \\
+		\hline \hline
+		\texttt{10} & \texttt{ADDIU} & Adds-accumulate an unsigned immediate
+		                               value to output register \\
+		\texttt{11} & \texttt{LWI} &   Copies the immediate value to
+		                               the register \\
+		\hline
+	\end{tabular}
+\end{center}
+
 \subsubsection{J-type instructions}
 
 \subsubsection{K-type instructions}
