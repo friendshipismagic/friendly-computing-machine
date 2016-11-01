@@ -7,6 +7,17 @@
 \usepackage{booktabs}
 \renewcommand{\arraystretch}{1.2}
 
+% Display code - main interest is it can import external files
+\usepackage{listings}
+\usepackage[usenames]{xcolor}
+
+% Custom style for the code
+\lstset{
+	commentstyle=\color{gray},
+	tabsize=4,
+	basicstyle={\small\ttfamily}
+}
+
 \setlength{\textwidth}{16cm} \setlength{\textheight}{23cm}
 \setlength{\oddsidemargin}{0cm} % +0.5 si {\textwidth}{15cm} ; -0,5 si {\textwidth}{15cm}
 \setlength{\headheight}{0cm} \setlength{\topmargin}{0.3cm}
@@ -194,6 +205,36 @@ Encodes to ${
 	\underbrace{\texttt{001}}_{reg 1}
 	\underbrace{\texttt{101}}_{reg 1}\mbox{}_2
 }$ = \texttt{0x7f4d}$_{16}$
+
+\subsubsection{Assembly samples}
+
+We will assume here that the assembler supports labels for the jumps -- which
+the included Javascript one does.
+
+\mbox{}\\
+The following code will load the constant $2^{21}$ into the register
+\texttt{\$r1} :
+\lstinputlisting[language={[x86masm]Assembler}]{../src/two_pow_21.s}
+To avoid the use of labels, it is equivalent to write \texttt{-2h} in
+place of \texttt{loop} in the \texttt{bne} instruction.
+
+\mbox{}\\
+This is the correspondance between a bit of C code and its compiled
+version :
+
+% The tabular forces the codes to be on the same height
+\noindent\begin{tabular}{cc}
+	\begin{lstlisting}[language=C]
+int *a = 0x200;
+int s = 0;
+for (int i = 0; i != 10; i++) {
+	s = s + *a;
+	a++;
+}
+\end{lstlisting}
+	&
+	\lstinputlisting[language={[x86masm]Assembler}]{../src/c_code.s}
+\end{tabular}
 
 \subsection{Pipelining}
 
