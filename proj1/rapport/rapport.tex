@@ -74,8 +74,8 @@ Encodes to ${
 	\underbrace{\texttt{0000010}}_{opcode}
 	\underbrace{\texttt{001}}_{out}
 	\underbrace{\texttt{010}}_{in 1}
-	\underbrace{\texttt{011}}_{in 2}
-}_2$ = \texttt{0x0453}$_{16}$
+	\underbrace{\texttt{011}}_{in 2}\mbox{}_2 % The mbox serves to add another subscript
+}$ = \texttt{0x0453}$_{16}$
 
 \subsubsection{I-type instructions}
 
@@ -105,6 +105,16 @@ Instruction list :
 		\hline
 	\end{tabular}
 \end{center}
+
+Example:
+
+\texttt{addiu \$r6 420h} : computes \texttt{\$r6} $+$ \texttt{0x420} and stores
+the result in \texttt{\$r6}. \\
+Encodes to ${
+	\underbrace{\texttt{10}}_{opcode}
+	\underbrace{\texttt{110}}_{out}
+	\underbrace{\texttt{10000100000}}_{value}\mbox{}_2
+}$ = \texttt{0xb420}$_{16}$
 
 \subsubsection{J-type instructions}
 
