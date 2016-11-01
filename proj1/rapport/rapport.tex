@@ -18,6 +18,10 @@
 	basicstyle={\small\ttfamily}
 }
 
+% TiKZ for the drawings
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
 \setlength{\textwidth}{16cm} \setlength{\textheight}{23cm}
 \setlength{\oddsidemargin}{0cm} % +0.5 si {\textwidth}{15cm} ; -0,5 si {\textwidth}{15cm}
 \setlength{\headheight}{0cm} \setlength{\topmargin}{0.3cm}
@@ -205,6 +209,59 @@ Encodes to ${
 	\underbrace{\texttt{001}}_{reg 1}
 	\underbrace{\texttt{101}}_{reg 1}\mbox{}_2
 }$ = \texttt{0x7f4d}$_{16}$
+
+\subsubsection{Instruction tree}
+
+We are using a binary tree to determine the actual instruction :
+
+\begin{center}
+\begin{tikzpicture}[>=stealth]
+	\tikzstyle{every node}=[align=center]
+	\tikzstyle{level 1}=[sibling distance=20mm]
+	\tikzstyle{level 2}=[sibling distance=10mm]
+	\tikzstyle{level 4}=[sibling distance=10mm]
+	\tikzstyle{level 5}=[sibling distance=30mm]
+	\tikzstyle{level 6}=[sibling distance=20mm]
+	\tikzstyle{level 7}=[sibling distance=10mm]
+	\node {} [->]
+		child {node {0}
+			child[sibling distance=15mm] {node {0}
+				child[sibling distance=15mm] {node {0}
+					child {node {0}
+						child {node {0}
+							child[sibling distance=15mm] {node {0}
+								child {node {0\\nop}}
+							}
+							child {node {1}
+								child {node {0\\sub}}
+								child {node {1\\add}}
+							}
+						}
+						child {node {1}
+							child[sibling distance=15mm] {node {0}
+								child {node {0\\mulu}}
+							}
+							child[sibling distance=15mm] {node {1}
+								child {node {0\\subu}}
+								child {node {1\\addu}}
+							}
+						}
+					}
+				}
+				child {node {1}
+					child {node {0\\lw}}
+					child {node {1\\rw}}
+				}
+			}
+			child {node {1\\bne}}
+		}
+		child {node {1}
+			child {node {0\\addiu}}
+			child {node {1\\lwi}}
+		}
+	;
+\end{tikzpicture}
+\end{center}
 
 \subsubsection{Assembly samples}
 
