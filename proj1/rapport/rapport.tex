@@ -66,6 +66,17 @@ Instruction list :
 	\end{tabular}
 \end{center}
 
+Example:
+
+\texttt{sub \$r1 \$r2 \$r3} : computes \texttt{\$r2} $-$ \texttt{\$r3} and stores the
+result in \texttt{\$r1}. \\
+Encodes to ${
+	\underbrace{\texttt{0000010}}_{opcode}
+	\underbrace{\texttt{001}}_{out}
+	\underbrace{\texttt{010}}_{in 1}
+	\underbrace{\texttt{011}}_{in 2}
+}_2$ = \texttt{0x0453}$_{16}$
+
 \subsubsection{I-type instructions}
 
 Instruction structure :
