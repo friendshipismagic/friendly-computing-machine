@@ -184,6 +184,17 @@ Instruction list :
 	\end{tabular}
 \end{center}
 
+Example:
+
+\texttt{bne -3h \$r1 \$r5} : compares \texttt{\$r1} and \texttt{\$r5} and
+jumps to \texttt{\$pc + immediate} if they are different \\
+Encodes to ${
+	\underbrace{\texttt{01}}_{opcode}
+	\underbrace{\texttt{11111101}}_{offset}
+	\underbrace{\texttt{001}}_{reg 1}
+	\underbrace{\texttt{101}}_{reg 1}\mbox{}_2
+}$ = \texttt{0x7f4d}$_{16}$
+
 \subsection{Pipelining}
 
 \end{document}
