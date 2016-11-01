@@ -146,6 +146,17 @@ Instruction list :
 	\end{tabular}
 \end{center}
 
+Example: if \texttt{\$r2} contains \texttt{0x1337},
+
+\texttt{lw \$r1 \$r2 0x2a} : reads the word at address \texttt{\$r2} +
+\texttt{0x2a} (i.e. \texttt{0x1361}) and stores it in \texttt{\$r1} \\
+Encodes to ${
+	\underbrace{\texttt{0010}}_{opcode}
+	\underbrace{\texttt{001}}_{out}
+	\underbrace{\texttt{010}}_{adr}
+	\underbrace{\texttt{101010}}_{offset}\mbox{}_2
+}$ = \texttt{0x22aa}$_{16}$
+
 \subsubsection{K-type instructions}
 
 Instruction structure :
