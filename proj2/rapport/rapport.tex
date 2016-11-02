@@ -35,6 +35,7 @@
 \renewcommand{\thesubsubsection}{\thesection.\arabic{subsection}.\alph{subsubsection}}
 
 \usepackage{mathtools} % Allows to write \textwidth-2cm in \includegraphics
+\usepackage{multirow}
 
 \author{Clément Decoodt, Alexis Bauvin, Alexandre Janniaux}
 \title{PR2 SE201: execution platforms}
@@ -194,6 +195,25 @@ When we change the line count of the cache, we observe the following results :
 
 The best configuration seems to be the 32-line cache since it minimizes the miss count to the absolute minimum
 of cache misses, needed for the first ever fetch (compulsory misses).
+\mbox{}\\
+
+By changing the associativity parameter, we gain the following results :
+
+\begin{center}
+	\begin{tabular}{|c|r||c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{Associativity} & 2 & 4 & 8 \\
+		\hline
+		\multirow{2}{*}{Misses}   & FIFO  & 50 & 44 & 47 \\
+		                          & LRU   & 52 & 47 & 80 \\
+		\multirow{2}{*}{Hit rate} & FIFO  & 91,78\% & 93,36\% & 92,69\% \\
+		                          & LRU   & 91.23\% & 92,52\% & 84,10\% \\
+		\hline
+	\end{tabular}
+\end{center}
+
+By switching the replacement policies to FIFO and setting the associativity to 4, we can increase the hit
+rate from 90,86\% (8 lines) to 93,36%.
 
 \end{document}
 
