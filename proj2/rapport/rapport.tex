@@ -108,6 +108,22 @@ Overall we notice that all branches are handled the same way : branch instructio
 \texttt{nop} that is fully executed, then by another instruction that is discarded (flushed). This is because
 the branch predictor needs a full cycle to tell wether it mispredicted.
 
+\section{Branch prediction}
+
+The useful statistics are provided in the \texttt{rates.log} file, containing stats for both 1-bit and 2-bit
+branch predictor. Overall, the 2-bit predictor saved us 4 cycles over the 1-bit predictor and lowered the
+misprediction rate from 19,14\% to 18,09\%. Although the benefits look small, they are instresting as a 2-bit
+saturation predictor is rather simple logic.
+
+It is important to note that, following an update of openDLX, the total jump count is lower in the 2-bit
+simulation than in the 1-bit one.
+\mbox{}\\
+
+The BPC stats are in the \texttt{bpc.log} file. Only lines 2 and 3 do differ between the 1-bit and the 2-bit
+BPC. Although the second branch is a bit worse with a misprediction rate of 0,22 compared to the ratio of 0,16
+(37.5\% worsening) of the 1-bit BPC, the third branch is ways better with a rate of 0,26 instead of 0,44
+(59\% improvement). Overall, the 2-bit BPC is better.
+
 \end{document}
 
 
