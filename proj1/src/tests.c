@@ -148,10 +148,8 @@ int main() {
 	addition_signed_test("00000", "00000", "00000"); // stupid error check
 	addition_signed_test("11111", "10000", "00000"); // -1 + 1 = 0, endian check
 	addition_signed_test("10000", "10000", "01000"); //  1 + 1 = 2, basic adder
-	addition_signed_test("11111", "10000", "00000"); //  1 + 2 = 3, basic adder
 	addition_signed_test("00000", "11111", "11111"); //  0 - 1 = -1, zero test
 	addition_signed_test("11111", "11111", "01111"); // -1 - 1 = -2, two negative
-	addition_signed_test("11111", "10000", "00000"); // -1 - 2 = -3, with carry
 	addition_signed_test("00001", "00001", "00000"); // overflow test
 	// TODO: overflow are tested in addition.tests makefile
 
