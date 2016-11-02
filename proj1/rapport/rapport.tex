@@ -72,7 +72,24 @@
 
 	For both the full and half adder, every input is tested as these are 1 bit only. \\
 
-\subsection{}
+\subsection{Signed addition}
+
+	In this part, we implemented a signed adder using two's complement method: inputs are first 1-complemented, them both are summed as unsigned, and finally the result is 1-complemented. An event is raised in case of overflow. To check for overflow we just needed to see if adding two same-signed numbers result in opposed-signed number. The tests are also available in tests file. They're mainly:
+
+\begin{center}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Test & Expected result & Tested event \\
+		\hline \hline
+		00000 + 00000 & 00000 & Complement basic error check \\
+		11111 + 10000 & 00000 & Endianness check \\
+		10000 + 10000 & 01000 & Tests for unsigned addition \\
+		00000 + 11111 & 11111 & Zero test \\
+		11111 + 11111 & 01111 & Negative test \\
+		00001 + 00001 & 00000 & Overflow test \\
+		\hline
+	\end{tabular}
+\end{center}
 
 \subsection{}
 
