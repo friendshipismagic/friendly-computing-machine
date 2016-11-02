@@ -86,6 +86,16 @@ to store his value.
 	\includegraphics[width=\textwidth-2cm]{images/pipeline_forwarding.png}
 \end{center}
 
+There are such unfinished instructions in the following screenshot :
+
+\begin{center}
+	\includegraphics[width=\textwidth-2cm]{images/pipeline_no_writeback_after_branching.png}
+\end{center}
+
+Here we can see that the \texttt{lhi 2,1} instruction never reaches the WB stage. This is because the
+\texttt{beqz~r0,0x3c} was mispredicted, thus the instruction is flushed, discarding its result.
+
+
 \end{document}
 
 
