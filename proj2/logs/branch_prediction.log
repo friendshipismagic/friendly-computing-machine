@@ -27,7 +27,3 @@ real 0m0.906s
 user 0m1.476s
 sys  0m0.096s
 
-
-=======
-The 1bit branch predictor seems to be better although it executes more instruction, because it is more cache-friendly in this context.
-What to compare : User CPU time according to Patterson's book
