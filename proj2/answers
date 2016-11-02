@@ -1,0 +1,24 @@
+
++ ``-nostdlib`` : this option tells the compiler that he should not link the standard library to the project.
+
++ ``-nostartfiles`` : this option tells the compiler that he sould not link standard systel startup files to the project.
+
+
+
+
+
+
+__fdata est en 0x111e0
+
+Cette instruction est responsable du chargement de _fdata dans le registre v0
+107c:   107c244211e0   addiuv0,v0,4576
+
+buff : 0x0effffd8
+
+# Par3 : Pipeline
+
+
+# Part5 : Data caches
+Aims : understand the performance of data caches.
+
+
