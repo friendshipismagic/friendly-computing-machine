@@ -231,6 +231,45 @@ When we increase the line size, we get the following :
 
 Here we can see that that we have better results that the direct mapped cache -- at identical cache size.
 However, with a cache size of 32, we get better results with a FIFO instead of a LRU.
+\mbox{}\\
+
+The absolut best result is held by the following settings, which gives us a hit/miss rate of 99,86\% with a
+\emph{single} cache miss, but at the cost of a cache of size 256.
+
+\begin{center}
+	\begin{tabular}{|cc|}
+		\hline
+		Line size          & 32  \\
+		\hline
+		Line count         & 8   \\
+		\hline
+		Associativity      & 4   \\
+		\hline
+		Replacement policy & LRU \\
+		\hline
+	\end{tabular}
+\end{center}
+
+The best tradeoff seems to be the following configuration, which gives us a hit/miss rate of 98,45% with 11
+cache misses, but with a cache of size 64.
+
+\begin{center}
+	\begin{tabular}{|cc|}
+		\hline
+		Line size          & 8   \\
+		\hline
+		Line count         & 8   \\
+		\hline
+		Associativity      & 4   \\
+		\hline
+		Replacement policy & LRU \\
+		\hline
+	\end{tabular}
+\end{center}
+
+The parameter that made the biggest difference seems to be the line size, which makes sense here, since the
+program accesses the data sequentially, loading a big chunk of the array at a single time in a large cache
+line.
 
 \end{document}
 
