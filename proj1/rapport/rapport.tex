@@ -7,6 +7,8 @@
 \usepackage{booktabs}
 \renewcommand{\arraystretch}{1.2}
 
+\usepackage{hyperref}
+
 % Display code - main interest is it can import external files
 \usepackage{listings}
 \usepackage[usenames]{xcolor}
@@ -43,7 +45,32 @@
 
 \section{Two's complement arithmetic}
 
-\subsection{}
+\subsection{Unsigned addition}
+
+	In this part, we implemented an unsigned adder using full adders made of half adders. Each adder was made entirely by logical operators in the file available in \href{https://github.com/friendshipismagic/friendly-computing-machine/blob/master/proj1/src/addition.c}{addition.c source file}. \\
+	
+	Chosen endianness is little endian to get a more natural operator reading and parsing \(left to right\). \\
+	
+	Useful inputs are available in the \href{https://github.com/friendshipismagic/friendly-computing-machine/blob/master/proj1/src/tests.c}{tests file}. The Unit test framework tests for the following events in the unsigned adder :
+
+\begin{center}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Test & Expected result & Tested event \\
+		\hline \hline
+		10000 + 10000 & 01000 & Carry check \\
+		00010 + 00001 & 00011 & Basic test \\
+		11110 + 11110 & 01111 & Yet another basic test \\
+		00001 + 00010 & 00011 & Basic commutativity check \\
+		00110 + 00010 & 00101 & Commutativity check with carry \\
+		00010 + 00110 & 00101 & Same as above \\
+		10101 + 11100 & 00111 & Random test \( Just in case \)\\
+		11111 + 10000 & 00000 & Overflow test \\
+		\hline
+	\end{tabular}
+\end{center}
+
+	For both the full and half adder, every input is tested as these are 1 bit only. \\
 
 \subsection{}
 
