@@ -34,6 +34,8 @@
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesection.\arabic{subsection}.\alph{subsubsection}}
 
+\usepackage{mathtools} % Allows to write \textwidth-2cm in \includegraphics
+
 \author{Clément Decoodt, Alexis Bauvin, Alexandre Janniaux}
 \title{PR2 SE201: execution platforms}
 
@@ -54,14 +56,15 @@ Nothing to do here
 There are many clues which show the processor is enabled to forwarding.
 
 First, the statistics window tell us:
-\begin{quote}
-    ALU forwarded values: 2 (from execute: 2, memory stage: 0, write back: 0)
-\end{quote}
+\begin{verbatim}
+ALU forwarded values: 2 (from execute: 2, memory stage: 0, write back: 0)
+\end{verbatim}
 
 Then, the log window tells us, for instruction 13:
-\begin{quote}
-    DEBUG [EXECUTE]: {FW} PC: 0x000011a0 forwarding changed value for ALU port A RS from: 0x0 to: 0xffffffe0
-\end{quote}
+\begin{verbatim}
+DEBUG [EXECUTE]: {FW} PC: 0x000011a0 forwarding changed value for ALU port A RS from:
+0x0 to: 0xffffffe0
+\end{verbatim}
 
 But we can also tell that the processor does forward because of the pipeline window.
 Indeed, the processor compute the following instructions:
@@ -78,7 +81,10 @@ So instruction $3.$ and $4.$  depends on instruction $2.$ which is executed at c
 At instruction $13$, $12$ has been executed, but the result is not written back in register yet,
 and $3.$ is to be decoded. It means that $3.$ is able to use the result from $2.$ before $2.$ has finished
 to store his value.
-%TODO screenshot
+
+\begin{center}
+	\includegraphics[width=\textwidth-2cm]{images/pipeline_forwarding.png}
+\end{center}
 
 \end{document}
 
