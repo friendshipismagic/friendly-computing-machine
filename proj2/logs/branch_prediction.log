@@ -1,0 +1,33 @@
+/cal/homes/brandner/opt/mips-2015.11/bin/mips-linux-gnu-gcc -g -Wall -O0 -fno-builtin -mips32 -EL -nostdlib -nostartfiles -static -Ttext 0x1000 -o bin/bsort.elf src/bsort.c
+bin/updatecfgFiles.sh bin/bsort.elf ./cfg > /dev/null 2>&1
+/cal/homes/brandner/opt/mips-2015.11/bin/mips-linux-gnu-objcopy -O binary -S bin/bsort.elf bin/bsort.bin
+/cal/homes/brandner/opt/openDLX-1.0/bin/openDLX -c cfg/bsort_bp_2bit_saturation.cfg
+Parameters: 
+0 -c
+1 cfg/bsort_bp_2bit_saturation.cfg
+Configuration is: {icache_use=1, icache_replacement_policy=DIRECT_MAPPED, dcache_write_policy=WRITE_THROUGH, dcache_line_number=4, dcache_line_size=4, use_forwarding=TRUE, btb_size=128, code_start_addr=0x1000, cycles=25000, icache_line_size=8, entry_point=0x0000119c, btb_predictor_initial_state=PREDICT_WEAKLY_NOT_TAKEN, icache_associativity=1, memory_burst_size=8, memory_latency=5, log_file=bsort_bp_2bit_saturation.log, log4j=log4j.properties, btb_predictor=D_2BIT_SATURATION,
+isa_type=MIPS, icache_line_number=32, print_file=printf.out, dcache_associativity=1, file=/cal/homes/janniaux/projects/cours/se201/proj2/bin/bsort.bin, dcache_replacement_policy=DIRECT_MAPPED, use_load_stall_bubble=TRUE, dcache_use=1}
+No suitable log4j property file found. Using default.
+Caught break instruction after 3904 cycles. Stopped simulation.
+
+real 0m0.893s
+user 0m1.612s
+sys  0m0.124s
+bin/updatecfgFiles.sh bin/bsort.elf ./cfg > /dev/null 2>&1
+/cal/homes/brandner/opt/openDLX-1.0/bin/openDLX -c cfg/bsort_bp_1bit.cfg
+Parameters: 
+0 -c
+1 cfg/bsort_bp_1bit.cfg
+Configuration is: {icache_use=1, icache_replacement_policy=DIRECT_MAPPED, dcache_write_policy=WRITE_THROUGH, dcache_line_number=4, dcache_line_size=4, use_forwarding=TRUE, btb_size=128, code_start_addr=0x1000, cycles=25000, icache_line_size=8, entry_point=0x0000119c, btb_predictor_initial_state=PREDICT_NOT_TAKEN, icache_associativity=1, memory_burst_size=8, memory_latency=5, log_file=bsort_bp_1bit.log, log4j=log4j.properties, btb_predictor=D_1BIT, isa_type=MIPS,
+icache_line_number=32, print_file=printf.out, dcache_associativity=1, file=/cal/homes/janniaux/projects/cours/se201/proj2/bin/bsort.bin, dcache_replacement_policy=DIRECT_MAPPED, use_load_stall_bubble=TRUE, dcache_use=1}
+No suitable log4j property file found. Using default.
+Caught break instruction after 3908 cycles. Stopped simulation.
+
+real 0m0.906s
+user 0m1.476s
+sys  0m0.096s
+
+
+=======
+The 1bit branch predictor seems to be better although it executes more instruction, because it is more cache-friendly in this context.
+What to compare : User CPU time according to Patterson's book
