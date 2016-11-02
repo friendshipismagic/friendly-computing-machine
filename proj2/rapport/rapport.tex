@@ -233,6 +233,12 @@ Here we can see that that we have better results that the direct mapped cache --
 However, with a cache size of 32, we get better results with a FIFO instead of a LRU.
 \mbox{}\\
 
+During the program, data is accessed sequentially from the same array, except at the beginning where it is
+copied. The data is reused a lot in the \texttt{buf} array. Because of the limited size of the program and the
+limited count of variable, most cache misses are compulsory conflicts. Overall, 14 words are read by the
+program.
+\mbox{}\\
+
 The absolut best result is held by the following settings, which gives us a hit/miss rate of 99,86\% with a
 \emph{single} cache miss, but at the cost of a cache of size 256.
 
