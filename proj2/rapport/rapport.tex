@@ -104,6 +104,10 @@ register, \texttt{r3}, is reused by the next instruction as an input and an outp
 the pipeline because it is forwarded, it would be erased otherwise.
 \mbox{}\\
 
+Overall we notice that all branches are handled the same way : branch instructions are followed by a
+\texttt{nop} that is fully executed, then by another instruction that is discarded (flushed). This is because
+the branch predictor needs a full cycle to tell wether it mispredicted.
+
 \end{document}
 
 
