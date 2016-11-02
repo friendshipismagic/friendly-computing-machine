@@ -177,6 +177,23 @@ Accesses: 488 hits: 364 misses: 124 hit rate: 74,59% loaded words: 124
 
 We see that over 488 accesses, 364 were hits while 124 were misses, leading to a hit rate of 74,59\%. The
 total cache size is 16.
+\mbox{}\\
+
+When we change the line count of the cache, we observe the following results :
+
+\begin{center}
+	\begin{tabular}{|r||c|c|c|c|c|}
+		\hline
+		Line count & 4 & 8 & 16 & 32 & 64 \\
+		Cache size & 16 & 32 & 64 & 128 & 256 \\
+		Misses     & 124 & 56 & 15 & 7 & 7 \\
+		Hit rate   & 74,59\% & 90,86\% & 97,82\% & 99,04\% & 99,04\% \\
+		\hline
+	\end{tabular}
+\end{center}
+
+The best configuration seems to be the 32-line cache since it minimizes the miss count to the absolute minimum
+of cache misses, needed for the first ever fetch (compulsory misses).
 
 \end{document}
 
