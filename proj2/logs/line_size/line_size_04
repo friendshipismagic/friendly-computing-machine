@@ -1,0 +1,4 @@
+INFO  [openDLX]: Icache: used rpol: DIRECT_MAPPED lines: 32 associativity: 1 line_size: 8 total size: 256
+INFO  [openDLX]: Accesses:2146 hits: 1865 misses: 281 hit rate: 86,91% loaded words: 562
+INFO  [openDLX]: Dcache: used rpol: LRU wpol: WRITE_THROUGH lines: 8 associativity: 4 line_size: 4 total size: 32
+INFO  [openDLX]: Accesses: 628 hits: 581 misses: 47 hit rate: 92,52% loaded words: 47
