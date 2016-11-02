@@ -108,6 +108,22 @@ limited, it probably is a RISC processor.
 
 \subsection{Multiplication and overflow}
 
+	The multiplier is made of an adder and a for loop. Zeroes and ones are immediatly treated to avoid entering in the loop. Tests are:
+
+\begin{center}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Test & Expected result & Tested event \\
+		\hline \hline
+		0x0 * 0x0 & 0x0 & Zero optimisation \\
+		0x1 * 0x1 & 0x1 & One optimisation \\
+		0x2 * 0x2 & 0x4 & Basic multiplication \\
+		0x1337 * 0x2 & 0x1337<<1 & Another basic multiplication \\
+		0xFFFFFFFF * 0xFFFFFFFF & overflow & Overflow test \\
+		\hline
+	\end{tabular}
+\end{center}
+
 \section{Processor design}
 
 \subsection{Instruction set architecture}
