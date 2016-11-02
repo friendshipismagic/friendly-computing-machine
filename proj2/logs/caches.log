@@ -1,0 +1,8 @@
+bsort_bp_1bit.log:INFO  [openDLX]: Icache: used rpol: DIRECT_MAPPED lines: 32 associativity: 1 line_size: 8 total size: 256
+bsort_bp_1bit.log:INFO  [openDLX]: Accesses:2503 hits: 2222 misses: 281 hit rate: 88,77% loaded words: 562
+bsort_bp_1bit.log:INFO  [openDLX]: Dcache: used rpol: DIRECT_MAPPED wpol: WRITE_THROUGH lines: 4 associativity: 1 line_size: 4 total size: 16
+bsort_bp_1bit.log:INFO  [openDLX]: Accesses: 488 hits: 364 misses: 124 hit rate: 74,59% loaded words: 124
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Icache: used rpol: DIRECT_MAPPED lines: 32 associativity: 1 line_size: 8 total size: 256
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Accesses:2499 hits: 2218 misses: 281 hit rate: 88,76% loaded words: 562
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Dcache: used rpol: DIRECT_MAPPED wpol: WRITE_THROUGH lines: 4 associativity: 1 line_size: 4 total size: 16
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Accesses: 488 hits: 364 misses: 124 hit rate: 74,59% loaded words: 124
