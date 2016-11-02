@@ -27,6 +27,13 @@
 \setlength{\headheight}{0cm} \setlength{\topmargin}{0.3cm}
 \setlength{\headsep}{0cm}
 
+% Deletes the chapters and uses roman numbers for the sections
+\usepackage{chngcntr}
+\counterwithout{section}{section}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesection.\arabic{subsection}.\alph{subsubsection}}
+
 \author{Clément Decoodt, Alexis Bauvin, Alexandre Janniaux}
 \title{PR1 SE201: execution platforms}
 
