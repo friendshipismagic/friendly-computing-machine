@@ -1,0 +1,8 @@
+bsort_bp_1bit.log:INFO  [openDLX]: Cycles: 3908
+bsort_bp_1bit.log:INFO  [openDLX]: Executed instructions: 2788
+bsort_bp_1bit.log:INFO  [openDLX]: Performed fetches: 2503
+bsort_bp_1bit.log:INFO  [openDLX]: Jumps correctly predicted: 169 mispredicted: 40 misprediction rate: 19,14%
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Cycles: 3904
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Executed instructions: 2788
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Performed fetches: 2499
+bsort_bp_2bit_saturation.log:INFO  [openDLX]: Jumps correctly predicted: 163 mispredicted: 36 misprediction rate: 18,09%
