@@ -110,23 +110,70 @@ the branch predictor needs a full cycle to tell wether it mispredicted.
 
 \section{Branch prediction}
 
-The useful statistics are provided in the \texttt{rates.log} file, containing stats for both 1-bit and 2-bit
-branch predictor. Overall, the 2-bit predictor saved us 4 cycles over the 1-bit predictor and lowered the
-misprediction rate from 19,14\% to 18,09\%. Although the benefits look small, they are instresting as a 2-bit
-saturation predictor is rather simple logic.
+1-bit Branch Predictor :
+\begin{verbatim}
+Cycles: 3908
+Executed instructions: 2788
+Performed fetches: 2503
+Jumps correctly predicted: 169 mispredicted: 40 misprediction rate: 19,14%
+\end{verbatim}
+2-bit Branch Predictor
+\begin{verbatim}
+Cycles: 3904
+Executed instructions: 2788
+Performed fetches: 2499
+Jumps correctly predicted: 163 mispredicted: 36 misprediction rate: 18,09%
+\end{verbatim}
+
+Overall, the 2-bit predictor saved us 4 cycles over the 1-bit predictor and lowered the misprediction rate
+from 19,14\% to 18,09\%. Although the benefits look small, they are instresting as a 2-bit saturation
+predictor is rather simple logic.
 
 It is important to note that, following an update of openDLX, the total jump count is lower in the 2-bit
 simulation than in the 1-bit one.
 \mbox{}\\
 
-The BPC stats are in the \texttt{bpc.log} file. Only lines 2 and 3 do differ between the 1-bit and the 2-bit
-BPC. Although the second branch is a bit worse with a misprediction rate of 0,22 compared to the ratio of 0,16
-(37.5\% worsening) of the 1-bit BPC, the third branch is ways better with a rate of 0,26 instead of 0,44
-(59\% improvement). Overall, the 2-bit BPC is better.
+\noindent 1-bit Branch Predictor :
+\begin{verbatim}
+bpc: 0x0000104c [76] tgts: [0x0000113c] a:66 t/nt: 66/0 mp/cp: 5/61 mp-ratio: 0,08
+bpc: 0x00001104 [4] tgts: [0x0000113c] a:56 t/nt: 10/46 mp/cp: 9/47 mp-ratio: 0,16
+bpc: 0x00001158 [88] tgts: [0x000010d4] a:27 t/nt: 21/6 mp/cp: 12/15 mp-ratio: 0,44
+bpc: 0x00001134 [52] tgts: [0x00001000] a:16 t/nt: 16/0 mp/cp: 1/15 mp-ratio: 0,06
+bpc: 0x000010cc [76] tgts: [0x00001148] a:11 t/nt: 11/0 mp/cp: 6/5 mp-ratio: 0,55
+bpc: 0x000010b0 [48] tgts: [0x00001070] a:8 t/nt: 7/1 mp/cp: 2/6 mp-ratio: 0,25
+bpc: 0x00001174 [116] tgts: [0x000010c8] a:7 t/nt: 6/1 mp/cp: 2/5 mp-ratio: 0,29
+bpc: 0x00001068 [104] tgts: [0x000010a8] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+bpc: 0x000010c0 [64] tgts: [0x0000116c] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+bpc: 0x000011b0 [48] tgts: [0x00001054] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+\end{verbatim}
+2-bit Branch Predictor :
+\begin{verbatim}
+bpc: 0x0000104c [76] tgts: [0x0000113c] a:66 t/nt: 66/0 mp/cp: 5/61 mp-ratio: 0,08
+bpc: 0x00001104 [4] tgts: [0x0000113c] a:46 t/nt: 10/36 mp/cp: 10/36 mp-ratio: 0,22
+bpc: 0x00001158 [88] tgts: [0x000010d4] a:27 t/nt: 21/6 mp/cp: 7/20 mp-ratio: 0,26
+bpc: 0x00001134 [52] tgts: [0x00001000] a:16 t/nt: 16/0 mp/cp: 1/15 mp-ratio: 0,06
+bpc: 0x000010cc [76] tgts: [0x00001148] a:11 t/nt: 11/0 mp/cp: 6/5 mp-ratio: 0,55
+bpc: 0x000010b0 [48] tgts: [0x00001070] a:8 t/nt: 7/1 mp/cp: 2/6 mp-ratio: 0,25
+bpc: 0x00001174 [116] tgts: [0x000010c8] a:7 t/nt: 6/1 mp/cp: 2/5 mp-ratio: 0,29
+bpc: 0x00001068 [104] tgts: [0x000010a8] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+bpc: 0x000010c0 [64] tgts: [0x0000116c] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+bpc: 0x000011b0 [48] tgts: [0x00001054] a:6 t/nt: 6/0 mp/cp: 1/5 mp-ratio: 0,17
+\end{verbatim}
+
+Only lines 2 and 3 do differ between the 1-bit and the 2-bit BPC. Although the second branch is a bit worse
+with a misprediction rate of 0,22 compared to the ratio of 0,16 (37.5\% worsening) of the 1-bit BPC, the third
+branch is ways better with a rate of 0,26 instead of 0,44 (59\% improvement). Overall, the 2-bit BPC is
+better.
 
 % TODO
 
 \section{Data Caches}
+
+\begin{verbatim}
+Dcache: used rpol: DIRECT_MAPPED wpol: WRITE_THROUGH lines: 4 associativity: 1
+    line_size: 4 total size: 16
+Accesses: 488 hits: 364 misses: 124 hit rate: 74,59% loaded words: 124
+\end{verbatim}
 
 We see that over 488 accesses, 364 were hits while 124 were misses, leading to a hit rate of 74,59\%. The
 total cache size is 16.
