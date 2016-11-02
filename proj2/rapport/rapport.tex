@@ -165,8 +165,11 @@ Only lines 2 and 3 do differ between the 1-bit and the 2-bit BPC. Although the s
 with a misprediction rate of 0,22 compared to the ratio of 0,16 (37.5\% worsening) of the 1-bit BPC, the third
 branch is ways better with a rate of 0,26 instead of 0,44 (59\% improvement). Overall, the 2-bit BPC is
 better.
+\mbox{}\\
 
-% TODO
+The first branch is the return \texttt{jr} of the swap function, thus it is always taken. The second branch
+if the \texttt{if} condition and does not branch most of the time. The second branch is the mysterious branch,
+as it is part of some code that looks like added by the compiler.
 
 \section{Data Caches}
 
