@@ -4,7 +4,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
+\usepackage{longtable}
+\usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{rotating}
+
 \renewcommand{\arraystretch}{1.2}
 
 \usepackage{hyperref}
@@ -12,6 +16,8 @@
 % Display code - main interest is it can import external files
 \usepackage{listings}
 \usepackage[usenames]{xcolor}
+
+\usepackage{svg}
 
 % Custom style for the code
 \lstset{
@@ -106,7 +112,7 @@ limited, it probably is a RISC processor.
 
 	The subtraction minus one is just an addition with the second input one's complemented to get $-B-1$ instead of $B$. Same basic tests as for unsigned addition are done.
 
-\subsection{Multiplication and overflow}
+\subsection{Multiplication}
 
 	The multiplier is made of an adder and a for loop. Zeroes and ones are immediatly treated to avoid entering in the loop. Tests are:
 
@@ -123,6 +129,141 @@ limited, it probably is a RISC processor.
 		\hline
 	\end{tabular}
 \end{center}
+
+\subsection{Multiplication and overflow}
+
+\subsubsection{Multiplication}
+
+Numbers are chosen randomly. $X=10100$ and $Y=11001$.
+
+\begin{center}
+	\begin{longtable}{|c|c|l|}
+		\hline
+		Iterator & Product register & Operations \\
+		\hline \hline
+		0        & 0             & Load Multiplicand and product register \\
+		\hline \hline
+		0        & 1010000000    & Add 1 to iterator, load $X$ in product register, load next multiplicand \\
+		\hline
+		         & ~~~1010000000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1        &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0101000000 & and branch if iterator equals $Y$ \\
+		\hline                  
+		         & ~~~0101000000 & Don't add to product register \\
+		10       &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1111000000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1111000000 & Don't add to product register \\
+		11       &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0010100000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0010100000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		100      &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1001100000 & Do not branch (iterator not equal to $Y$) \\
+		\hline \hline           
+		         & ~~~1001100000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		101      &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0111100000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0111100000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		110      &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1100010000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1100010000 & Don't add to product register \\
+		111      &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0001010000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0001010000 & Don't add to product register \\
+		1000     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1011010000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1011010000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1001     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0100110000 & Do not branch (iterator not equal to $Y$) \\
+		\hline \hline           
+		         & ~~~0100110000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1010     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1110110000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1110110000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1011     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0011110000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0011110000 & Don't add to product register \\
+		1100     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1000001000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1000001000 & Don't add to product register \\
+		1101     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0110001000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0110001000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1110     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1101001000 & Do not branch (iterator not equal to $Y$) \\
+		\hline \hline           
+		         & ~~~1101001000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		1111     &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0000101000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0000101000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		10000    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1010101000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1010101000 & Don't add to product register \\
+		10001    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0101101000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0101101000 & Don't add to product register \\
+		10010    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1111101000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1111101000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		10011    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0010011000 & Do not branch (iterator not equal to $Y$) \\
+		\hline \hline           
+		         & ~~~0010011000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		10100    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1001011000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1001011000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		10101    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0111011000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0111011000 & Don't add to product register \\
+		10110    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1100111000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~1100111000 & Don't add to product register \\
+		10111    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~0001111000 & Do not branch (iterator not equal to $Y$) \\
+		\hline                  
+		         & ~~~0001111000 & Add-accumulate product register with $X$ as multiplicand is $1$ \\
+		11000    &  +~1010000000 & load new multiplicand, increase iterator \\
+		         &  =~1011111000 & Do not branch (iterator not equal to $Y$) \\
+		\hline \hline           
+		11001    & 0  1011111000 & Iterator equals $Y$, this is the end! \\
+		\hline
+
+	\end{longtable}
+\end{center}
+
+\subsubsection{Overflow determination}
+
+Let's declare $v$ where
+$$\left\lbrace
+\begin{array}{lr}
+	v(1>>n) = n+1 \\
+	v(1>>n + 1>>m) = max(v(n),v(m)) + (n==m) \\
+	\forall a,b \neq 0 : v(a*b) = v(a) + v(b)
+\end{array}\right.
+$$
+
+So, overflow condition is $v(a*b) \leq N+1$, meaning $v(a)+v(b) \leq 6$
+
+\subsubsection{Example}
+
+Chosen $A=00001$ and $B=01000$ (little endian), we can check for overflow: $v(A*B)=v(A)+v(B)=5 + 2 \geq 6$ \\
+We overflow here! In fact, the result is $A*B=000001$ which is not storable on a 5-bit number.
 
 \section{Processor design}
 
@@ -374,6 +515,21 @@ for (int i = 0; i != 10; i++) {
 \end{tabular}
 
 \subsection{Pipelining}
+
+Pipelined processor is drawn here. Actual hazards can be:
+
+\begin{itemize}
+	\item Data hazard, when a branch should be followed based on a register being calculated on the ALU \\
+	\item Control hazard, when a branch is going to happen the two next operation can be forwarded and flushed (wrong branch prediction)
+	\item If a lw and a sll happens on the same register, this register will be accessed at the same time
+\end{itemize}
+
+A basic solution is to stall. Forwarding cannot occur as we would need a 5-stage processor to enable forwarding (there is no MEM or WB stage here). Flushing can be used to help resolve control hazard.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=25cm]{processor.png}
+\end{sidewaysfigure}
 
 \end{document}
 
