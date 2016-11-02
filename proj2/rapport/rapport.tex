@@ -214,6 +214,23 @@ By changing the associativity parameter, we gain the following results :
 
 By switching the replacement policies to FIFO and setting the associativity to 4, we can increase the hit
 rate from 90,86\% (8 lines) to 93,36\% with the same cache size of 32.
+\mbox{}\\
+
+When we increase the line size, we get the following :
+
+\begin{center}
+	\begin{tabular}{|r||c|c|c|c|}
+		\hline
+		Line size  & 4       & 8       & 16      & 32      \\
+		Cache size & 32      & 64      & 128     & 256     \\
+		Misses     & 47      & 11      & 2       & 1       \\
+		Hit rate   & 92,52\% & 98,45\% & 99,73\% & 99,86\% \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Here we can see that that we have better results that the direct mapped cache -- at identical cache size.
+However, with a cache size of 32, we get better results with a FIFO instead of a LRU.
 
 \end{document}
 
