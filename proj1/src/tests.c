@@ -138,6 +138,9 @@ int main() {
 
 	addition_test("10000", "10000", "01000"); // carry check
 	addition_test("00010", "00001", "00011"); // addition check
+    addition_test("00001", "00010", "00011"); // commutativity check (same as above)
+    addition_test("00110", "00010", "00101"); // commutativity check with carry
+    addition_test("00010", "00110", "00101"); // commutativity check with carry (same as above)
 	addition_test("11110", "11110", "01111"); // both
 	addition_test("10101", "11100", "00111"); // random
 	addition_test("11111", "10000", "00000");
