@@ -167,9 +167,16 @@ branch is ways better with a rate of 0,26 instead of 0,44 (59\% improvement). Ov
 better.
 \mbox{}\\
 
-The first branch is the return \texttt{jr} of the swap function, thus it is always taken. The second branch
-if the \texttt{if} condition and does not branch most of the time. The second branch is the mysterious branch,
-as it is part of some code that looks like added by the compiler.
+The first branch is the return \texttt{jr} of the \texttt{swap} function, thus it is always taken. 
+The second branch if the \texttt{if} condition and does not branch most of the time. 
+
+After seeking for answers about why the \texttt{swap} function being called more often than the \texttt{if} statement, we found that the statistics window was incorrect. 
+Indeed, according to these stats the \texttt{if} statement would be called much more than needed.
+Actually, it is called $27$ ($7*8/2-1$) times.
+
+When a branch is mispredicted, two bubbles are inserted in the pipeline. 
+The first one is executed and the second one flushed.
+It differs from the lesson since we studied an architecture which would flush both of them.
 
 \section{Data Caches}
 
